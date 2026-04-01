@@ -63,7 +63,7 @@ const CodeforcesIcon = () => (
 
 const codingProfiles = [
   { icon: LeetCodeIcon, label: 'LeetCode', href: 'https://leetcode.com/u/MayankVerma123/' },
-  { icon: CodeChefIcon, label: 'CodeChef', href: 'https://www.codechef.com/users/mynk_vrma' },
+  { icon: CodeChefIcon, label: 'CodeChef', href: 'https://www.codechef.com/users/spry_trick_11' },
   { icon: CodeforcesIcon, label: 'Codeforces', href: 'https://codeforces.com/profile/mayankkverma4' },
 ];
 
