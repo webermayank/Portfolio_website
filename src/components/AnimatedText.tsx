@@ -4,12 +4,14 @@ import { cn } from '@/lib/utils';
 interface AnimatedTextProps {
   text: string | string[];
   className?: string;
+  style?: React.CSSProperties;
   once?: boolean;
 }
 
 const AnimatedText: React.FC<AnimatedTextProps> = ({ 
   text, 
   className = "",
+  style,
   once = false 
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,9 +59,9 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
   }, [currentText, currentIndex, isDeleting, textArray, once, typingSpeed]);
 
   return (
-    <span className={cn("inline-block", className)}>
+    <span className={cn("inline-block", className)} style={style}>
       {currentText}
-      <span className="animate-pulse ml-0.5">|</span>
+      <span style={{ opacity: 0.7 }}>|</span>
     </span>
   );
 };

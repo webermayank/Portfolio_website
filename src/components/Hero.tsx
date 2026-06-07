@@ -1,146 +1,279 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from "@/components/ui/button";
+import { Github, Linkedin, Twitter, FileText, Download, ArrowDown } from 'lucide-react';
 import AnimatedText from './AnimatedText';
-import { Github, Linkedin, Eye, FileText, X, Download } from 'lucide-react';
+
+const socialLinks = [
+  {
+    href: 'https://github.com/webermayank/',
+    icon: Github,
+    label: 'GitHub',
+  },
+  {
+    href: 'https://www.linkedin.com/in/mayank-kumar-verma-17a5b72a2/',
+    icon: Linkedin,
+    label: 'LinkedIn',
+  },
+  {
+    href: 'https://x.com/MayankV0611',
+    icon: Twitter,
+    label: 'Twitter / X',
+  },
+];
 
 const Hero = () => {
-  const handleResumeView = () => {
-    window.open('/resumeLatest.pdf', '_blank');
-  };
-
+  const handleResumeView = () => window.open('/resumeLatest.pdf', '_blank');
   const handleResumeDownload = () => {
     const link = document.createElement('a');
     link.href = '/resumeLatest.pdf';
-    link.download = 'resumeLatest.pdf';
+    link.download = 'Mayank_Verma_Resume.pdf';
     link.click();
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36">
-      <div className="container mx-auto px-4 z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold leading-normal mb-6"
-            initial={{ opacity: 0, y: -20 }}
+    <section
+      id="hero"
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: '80px',
+        paddingBottom: '40px',
+      }}
+    >
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem', width: '100%' }}>
+        <div style={{ maxWidth: '640px' }}>
+
+          {/* Availability badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            style={{ marginBottom: '1.75rem' }}
           >
-            <span className="block">Hi, I'm Mayank Verma</span>
-            <span className="block mt-2 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">I design and develop high-performance web applications.</span>
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                padding: '0.3rem 0.75rem',
+                borderRadius: '999px',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface)',
+                fontSize: '0.72rem',
+                fontWeight: 500,
+                color: 'var(--text-secondary)',
+                letterSpacing: '0.02em',
+              }}
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  backgroundColor: '#22c55e',
+                  display: 'inline-block',
+                  flexShrink: 0,
+                }}
+              />
+              Open to internship &amp; full-time opportunities
+            </span>
+          </motion.div>
+
+          {/* Name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            style={{
+              fontSize: 'clamp(2.2rem, 6vw, 3.5rem)',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
+              lineHeight: 1.08,
+              color: 'var(--text-primary)',
+              marginBottom: '0.5rem',
+            }}
+          >
+            Mayank Verma
           </motion.h1>
-          
-          <motion.h2 
-            className="text-lg md:text-xl text-gray-400 mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+
+          {/* Animated role */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+            style={{
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
+              fontWeight: 500,
+              color: 'var(--text-secondary)',
+              marginBottom: '1.25rem',
+              letterSpacing: '-0.02em',
+              minHeight: '2rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+            }}
           >
-            <span className="block">I craft</span>
-            <AnimatedText 
+            <span>I build</span>
+            <AnimatedText
               text={[
-                " Scalable full stack solutions ", 
-                "Intelligent & data-driven features", 
-                "Scalable system design",
-                "AI-powered user experiences"
-              ]} 
-              className="text-blue-400 font-medium" 
+                'scalable full-stack systems',
+                'AI-powered applications',
+                'data-driven features',
+                'production-grade backends',
+              ]}
+              className=""
+              style={{
+                color: 'var(--accent)',
+                fontWeight: 600,
+              } as React.CSSProperties}
             />
-          </motion.h2>
-          
-          <motion.p 
-            className="text-md mb-10 text-gray-500"
+          </motion.div>
+
+          {/* Bio */}
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            style={{
+              fontSize: '0.95rem',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.75,
+              marginBottom: '2rem',
+              maxWidth: '540px',
+            }}
           >
-           Studying in Indian Institute of Information Technology Bhopal.
+            Full-stack engineer at{' '}
+            <strong style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+              IIIT Bhopal
+            </strong>
+            , focused on building intelligent, scalable applications — from system design
+            and backend architecture to AI-driven user experiences.
           </motion.p>
-          
-          {/* Social Icons above buttons */}
-          <motion.div 
-            className="flex justify-center gap-6 mb-6"
-            initial={{ opacity: 0, y: 10 }}
+
+          {/* Social links */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
+            transition={{ duration: 0.4, delay: 0.36 }}
+            style={{
+              display: 'flex',
+              gap: '0.5rem',
+              marginBottom: '1.75rem',
+            }}
           >
-            <a href="https://github.com/webermayank/" target="_blank" rel="noopener noreferrer" className="group">
-              <div className="relative p-3 rounded-xl bg-black/40 backdrop-blur-sm border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/10 to-purple-600/0 rounded-xl blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 scale-150 group-hover:scale-100"></div>
-                <Github className="w-6 h-6 relative z-10 text-white group-hover:text-blue-400 transition-colors duration-300" />
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/mayank-kumar-verma-17a5b72a2/" target="_blank" rel="noopener noreferrer" className="group">
-              <div className="relative p-3 rounded-xl bg-black/40 backdrop-blur-sm border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/10 to-purple-600/0 rounded-xl blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 scale-150 group-hover:scale-100"></div>
-                <Linkedin className="w-6 h-6 relative z-10 text-white group-hover:text-blue-400 transition-colors duration-300" />
-              </div>
-            </a>
-            <a href="https://x.com/MayankV0611" target="_blank" rel="noopener noreferrer" className="group">
-              <div className="relative p-3 rounded-xl bg-black/40 backdrop-blur-sm border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/10 to-purple-600/0 rounded-xl blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 scale-150 group-hover:scale-100"></div>
-                <X className="w-6 h-6 relative z-10 text-white group-hover:text-blue-400 transition-colors duration-300" />
-              </div>
-            </a>
-          </motion.div>
-          
-          <motion.div 
-            className="flex flex-col sm:flex-row justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-          >
-            <Button className="py-6 px-8 bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2">
-              <Eye className="w-5 h-5 mr-2" />
-              <a href="#projects">My Work</a>
-            </Button>
-            <div className="flex items-center gap-2">
-              <Button 
-                variant="outline" 
-                className="py-6 px-8 border-blue-500/30 text-blue-400 hover:bg-blue-900/20 flex items-center gap-2"
-                onClick={handleResumeView}
+            {socialLinks.map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'var(--surface)',
+                  color: 'var(--text-secondary)',
+                  textDecoration: 'none',
+                  transition: 'border-color 0.2s ease, color 0.2s ease, transform 0.15s ease',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--accent)';
+                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--border)';
+                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+                }}
               >
-                <FileText className="w-5 h-5 mr-2" />
-                Resume
-              </Button>
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="py-6 px-3 border-blue-500/30 text-blue-400 hover:bg-blue-900/20"
-                onClick={handleResumeDownload}
-                title="Download Resume"
-              >
-                <Download className="w-5 h-5" />
-              </Button>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            className="mt-16 flex justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-          >
-            <div className="animate-bounce p-2 bg-blue-900/30 rounded-full border border-blue-500/20">
-              <a href="#technologies" className="text-blue-400">
-                <svg 
-                  className="w-6 h-6" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-                  />
-                </svg>
+                <Icon size={15} strokeWidth={1.8} />
               </a>
-            </div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.44 }}
+            style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}
+          >
+            <a href="#projects" className="btn-primary" style={{ fontSize: '0.85rem', padding: '0.55rem 1.1rem' }}>
+              View my work
+            </a>
+
+            <button
+              onClick={handleResumeView}
+              className="btn-secondary"
+              style={{ fontSize: '0.85rem', padding: '0.55rem 1.1rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+            >
+              <FileText size={13} strokeWidth={2} />
+              Resume
+            </button>
+
+            <button
+              onClick={handleResumeDownload}
+              aria-label="Download resume"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '34px',
+                height: '34px',
+                borderRadius: '7px',
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--surface)',
+                color: 'var(--text-secondary)',
+                cursor: 'pointer',
+                transition: 'border-color 0.2s ease, color 0.2s ease',
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border-hover)';
+                (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-primary)';
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
+                (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-secondary)';
+              }}
+            >
+              <Download size={13} strokeWidth={2} />
+            </button>
           </motion.div>
         </div>
+
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          style={{
+            position: 'absolute',
+            bottom: '2.5rem',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.3rem',
+            color: 'var(--text-muted)',
+          }}
+        >
+          <span style={{ fontSize: '0.65rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>scroll</span>
+          <motion.div
+            animate={{ y: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+          >
+            <ArrowDown size={14} strokeWidth={1.5} />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

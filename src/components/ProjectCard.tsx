@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Github, Zap } from 'lucide-react';
 
 export interface Project {
   id: number;
@@ -23,85 +21,176 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
+  const isInProgress = project.statusGlow === 'in-progress';
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0,
-        transition: {
-          type: "spring",
-          bounce: 0.4,
-          duration: 0.8,
-          delay: index * 0.1
-        }
-      }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      whileHover={{ y: -5 }}
-      className="h-full group"
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+      style={{ height: '100%' }}
     >
-      <Card className="overflow-hidden transition-all duration-300 h-full flex flex-col bg-gray-900/70 border-gray-800 rounded-xl relative project-card-hover card-shadow-effect">
-        {/* Simple but visible shadow effect */}
-        <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 rounded-xl transition-all duration-300 blur-md scale-150 group-hover:scale-100 -z-10"></div>
-        
-        <div className="overflow-hidden h-48 relative">
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+      <div
+        className="card-base"
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: '12px',
+          overflow: 'hidden',
+          transition: 'border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease',
+        }}
+        onMouseEnter={e => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.borderColor = 'var(--border-hover)';
+          el.style.boxShadow = 'var(--shadow-lg)';
+          el.style.transform = 'translateY(-4px)';
+        }}
+        onMouseLeave={e => {
+          const el = e.currentTarget as HTMLDivElement;
+          el.style.borderColor = 'var(--border)';
+          el.style.boxShadow = 'var(--shadow-sm)';
+          el.style.transform = 'translateY(0)';
+        }}
+      >
+        {/* Image */}
+        <div
+          style={{
+            height: '180px',
+            overflow: 'hidden',
+            position: 'relative',
+            flexShrink: 0,
+            backgroundColor: 'var(--surface-2)',
+          }}
+        >
+          <img
+            src={project.image}
+            alt={project.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              transition: 'transform 0.4s ease',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1.04)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1)'; }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
+          {/* Subtle gradient overlay */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, rgba(0,0,0,0.18) 0%, transparent 60%)',
+              pointerEvents: 'none',
+            }}
+          />
+          {/* Status badge */}
+          {isInProgress && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '0.65rem',
+                right: '0.65rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+                padding: '0.2rem 0.55rem',
+                borderRadius: '999px',
+                backgroundColor: 'rgba(20,20,22,0.8)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                backdropFilter: 'blur(6px)',
+              }}
+            >
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
+              <span style={{ fontSize: '0.62rem', fontWeight: 600, color: '#fff', letterSpacing: '0.04em' }}>
+                In Progress
+              </span>
+            </div>
+          )}
         </div>
-        
-        <CardHeader>
-          <div className="flex items-center gap-2">
-            <CardTitle className="text-xl font-semibold text-white flex items-center gap-2">
-              {project.title}
-              {project.statusGlow === 'in-progress' && (
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-              )}
-            </CardTitle>
-          </div>
-          <div className="flex flex-wrap gap-2 mt-2">
-            {project.tags.map((tag, index) => (
-              <Badge key={index} variant="outline" className="text-xs bg-gray-800/50 text-blue-300 border-blue-500/20">
-                {tag}
-              </Badge>
+
+        {/* Content */}
+        <div style={{ padding: '1.1rem 1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+          {/* Tags */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '0.75rem' }}>
+            {project.tags.slice(0, 5).map(tag => (
+              <span key={tag} className="tag">{tag}</span>
             ))}
+            {project.tags.length > 5 && (
+              <span className="tag">+{project.tags.length - 5}</span>
+            )}
           </div>
-        </CardHeader>
-        
-        <CardContent className="flex-grow">
-          <CardDescription className="text-sm text-gray-400">
+
+          {/* Title */}
+          <h3
+            style={{
+              fontSize: '0.95rem',
+              fontWeight: 600,
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.4,
+              marginBottom: '0.6rem',
+            }}
+          >
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p
+            style={{
+              fontSize: '0.8rem',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.75,
+              flex: 1,
+              display: '-webkit-box',
+              WebkitLineClamp: 4,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
             {project.description}
-          </CardDescription>
-        </CardContent>
-        
-        <CardFooter className="flex justify-between gap-4 pt-2">
-          {project.demoUrl && (
-            <Button asChild className={`w-full px-8 py-2 rounded-full ${
-              project.status 
-                ? project.statusColor || '' 
-                : 'bg-gradient-to-b from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200'
-            }`}>
-              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                {project.status ? project.status : 'Live Demo'}
+          </p>
+
+          {/* Actions */}
+          <div
+            style={{
+              display: 'flex',
+              gap: '0.6rem',
+              marginTop: '1rem',
+              paddingTop: '0.85rem',
+              borderTop: '1px solid var(--border)',
+            }}
+          >
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+                style={{ flex: 1, justifyContent: 'center', fontSize: '0.78rem', padding: '0.45rem 0.75rem' }}
+              >
+                {isInProgress ? (
+                  <><Zap size={12} strokeWidth={2} /> In Progress</>
+                ) : (
+                  <><ExternalLink size={12} strokeWidth={2} /> Live Demo</>
+                )}
               </a>
-            </Button>
-          )}
-          
-          {project.githubUrl && (
-            <Button asChild className="w-full px-8 py-2 rounded-full bg-gradient-to-b from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white focus:ring-2 focus:ring-gray-400 hover:shadow-xl transition duration-200">
-              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                GitHub
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+                style={{ flex: 1, justifyContent: 'center', fontSize: '0.78rem', padding: '0.45rem 0.75rem' }}
+              >
+                <Github size={12} strokeWidth={2} /> GitHub
               </a>
-            </Button>
-          )}
-        </CardFooter>
-      </Card>
+            )}
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 };

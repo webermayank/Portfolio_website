@@ -1,171 +1,270 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from "@/components/ui/button";
-import {
-  User,
-  Code2,
-  BookOpen,
-  Brain,
-  Mail,
-  Menu,
-  X,
-  Sparkles,
-} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Sun, Moon, Mail } from 'lucide-react';
+import { useTheme } from '@/context/ThemeContext';
+
+const navItems = [
+  { href: '#technologies', label: 'Skills' },
+  { href: '#about',        label: 'About' },
+  { href: '#projects',     label: 'Projects' },
+];
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled]         = useState(false);
+  const [mobileOpen, setMobileOpen]     = useState(false);
+  const { theme, toggleTheme }           = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navItems = [
-    { href: "#hero", label: "Home", icon: User },
-    { href: "#technologies", label: "Skills", icon: Brain },
-    { href: "#about", label: "About Me", icon: User },
-    { href: "#projects", label: "Projects", icon: Code2 },
-    
-  ];
+  // Close mobile menu on resize
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 h-20 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-gray-900/30 backdrop-blur-md shadow-lg shadow-black/10' 
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-        <div className="flex justify-between items-center h-full">
-          {/* Logo with glowing effect */}
-          <a href="#" className="relative group flex items-center justify-center">
-            {/* Full logo glow effect */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-900 rounded-full blur-2xl opacity-60 group-hover:opacity-90 transition-all duration-500"></div>
-            </div>
-            <img 
-              src="/lovable-uploads/e9810342-de6a-4f13-9171-0077afe8c75a.png" 
-              alt="Kalp Logo" 
-              className="h-14 w-14 relative z-10 -rotate-90" 
-            />
-          </a>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center flex-1 justify-center">
-            {/* Main Navigation */}
-            <div className="flex px-8 py-2 bg-gray-900/30 backdrop-blur-md rounded-full border border-white/10 shadow-xl">
-              <div className="flex space-x-8 items-center justify-center">
-                {navItems.map((item) => (
-                  <IslandNavLink key={item.href} href={item.href}>
-                    <item.icon className="w-4 h-4 mr-2" />
-                    {item.label}
-                  </IslandNavLink>
-                ))}
-              </div>
-            </div>
-          </div>
+    <>
+      <header
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          height: '60px',
+          backgroundColor: scrolled
+            ? (theme === 'dark' ? 'rgba(24,24,27,0.88)' : 'rgba(248,247,244,0.88)')
+            : 'transparent',
+          backdropFilter: scrolled ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+          borderBottom: scrolled ? `1px solid var(--border)` : '1px solid transparent',
+          transition: 'background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
+        }}
+      >
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem', height: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%' }}>
 
-          {/* Contact Button */}
-          <div className="hidden md:block">
-            <Button
-              className="px-8 py-2 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:via-purple-400 hover:to-pink-400 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200"
-              asChild
+            {/* Logo */}
+            <a
+              href="#hero"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 800,
+                fontSize: '1.1rem',
+                letterSpacing: '-0.04em',
+                color: 'var(--text-primary)',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
             >
-              <a href="#contact">
-                <span className="relative flex items-center">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Contact
-                </span>
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '8px',
+                  backgroundColor: 'var(--accent)',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: '0.8rem',
+                  letterSpacing: '-0.02em',
+                  flexShrink: 0,
+                }}
+              >
+                MV
+              </span>
+              <span style={{ color: 'var(--text-primary)' }}>Mayank</span>
+            </a>
+
+            {/* Desktop Nav */}
+            <nav style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} className="hidden md:flex">
+              {navItems.map(item => (
+                <NavLink key={item.href} href={item.href}>{item.label}</NavLink>
+              ))}
+            </nav>
+
+            {/* Right controls */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '34px',
+                  height: '34px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'var(--surface)',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  transition: 'border-color 0.2s, background-color 0.2s',
+                  flexShrink: 0,
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border-hover)';
+                  (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)';
+                  (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-secondary)';
+                }}
+              >
+                {theme === 'dark'
+                  ? <Sun size={15} strokeWidth={2} />
+                  : <Moon size={15} strokeWidth={2} />
+                }
+              </button>
+
+              {/* Contact CTA — desktop only */}
+              <a
+                href="#contact"
+                className="hidden md:inline-flex"
+                style={{
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.45rem 1rem',
+                  backgroundColor: 'var(--accent)',
+                  color: '#fff',
+                  fontSize: '0.8rem',
+                  fontWeight: 600,
+                  borderRadius: '7px',
+                  textDecoration: 'none',
+                  letterSpacing: '-0.01em',
+                  transition: 'background-color 0.2s ease, transform 0.15s ease',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--accent-hover)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--accent)';
+                  (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
+                }}
+              >
+                <Mail size={13} strokeWidth={2.5} />
+                Contact
               </a>
-            </Button>
-          </div>
-          
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-white hover:bg-gray-800"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </Button>
+
+              {/* Mobile Hamburger */}
+              <button
+                className="md:hidden"
+                onClick={() => setMobileOpen(o => !o)}
+                aria-label="Open menu"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '34px',
+                  height: '34px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'var(--surface)',
+                  color: 'var(--text-primary)',
+                  cursor: 'pointer',
+                }}
+              >
+                {mobileOpen ? <X size={16} /> : <Menu size={16} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <motion.div 
-          className="md:hidden p-4 bg-gray-900/95 border-t border-gray-800 backdrop-blur-md"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-        >
-          <div className="flex flex-col space-y-3">
-            {navItems.map((item) => (
-              <MobileNavLink 
-                key={item.href} 
-                href={item.href} 
-                onClick={() => setMobileMenuOpen(false)}
+      </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            style={{
+              position: 'fixed',
+              top: '60px',
+              left: '1rem',
+              right: '1rem',
+              zIndex: 49,
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border)',
+              borderRadius: '12px',
+              boxShadow: 'var(--shadow-lg)',
+              padding: '0.75rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '2px',
+            }}
+          >
+            {[...navItems, { href: '#contact', label: 'Contact' }].map(item => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  display: 'block',
+                  padding: '0.6rem 0.75rem',
+                  borderRadius: '8px',
+                  color: 'var(--text-secondary)',
+                  textDecoration: 'none',
+                  fontSize: '0.875rem',
+                  fontWeight: 500,
+                  transition: 'background-color 0.15s ease, color 0.15s ease',
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--surface-2)';
+                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)';
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent';
+                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)';
+                }}
               >
-                <item.icon className="w-4 h-4 mr-2" />
                 {item.label}
-              </MobileNavLink>
+              </a>
             ))}
-            <MobileNavLink href="#contact" onClick={() => setMobileMenuOpen(false)}>
-              <Mail className="w-4 h-4 mr-2" />
-              Contact
-            </MobileNavLink>
-          </div>
-        </motion.div>
-      )}
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
-const IslandNavLink = ({ 
-  href, 
-  children 
-}: { 
-  href: string; 
-  children: React.ReactNode;
-}) => {
-  return (
-    <a 
-      href={href} 
-      className="relative px-3 py-2 text-gray-300 hover:text-white transition-all duration-300 group flex items-center"
-    >
-      <span className="relative z-10 flex items-center">{children}</span>
-      <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/20 group-hover:via-purple-500/20 group-hover:to-pink-500/20 opacity-0 group-hover:opacity-100 rounded-full blur-sm transition-all duration-300"></span>
-      <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
-    </a>
-  );
-};
-
-const MobileNavLink = ({ 
-  href, 
-  children,
-  onClick
-}: { 
-  href: string; 
-  children: React.ReactNode;
-  onClick: () => void;
-}) => (
-  <a 
-    href={href} 
-    onClick={onClick}
-    className="text-gray-300 hover:text-white py-2 px-4 block hover:bg-gray-800 rounded-md transition-colors flex items-center"
+const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a
+    href={href}
+    style={{
+      padding: '0.4rem 0.75rem',
+      borderRadius: '6px',
+      color: 'var(--text-secondary)',
+      textDecoration: 'none',
+      fontSize: '0.85rem',
+      fontWeight: 500,
+      letterSpacing: '-0.01em',
+      transition: 'color 0.15s ease, background-color 0.15s ease',
+      display: 'inline-block',
+    }}
+    onMouseEnter={e => {
+      (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-primary)';
+      (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--surface-2)';
+    }}
+    onMouseLeave={e => {
+      (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-secondary)';
+      (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent';
+    }}
   >
     {children}
   </a>
