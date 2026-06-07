@@ -18,7 +18,7 @@ const CustomScrollbar = () => {
         left: 0,
         right: 0,
         height: '2px',
-        backgroundColor: 'var(--accent)',
+        backgroundColor: 'var(--brand)',
         transformOrigin: 'left',
         zIndex: 60,
         opacity: 0.85,

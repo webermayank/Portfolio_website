@@ -98,7 +98,7 @@ const TechItem = ({
         }}
         onMouseEnter={e => {
           const el = e.currentTarget as HTMLDivElement;
-          el.style.borderColor = 'var(--accent)';
+          el.style.borderColor = 'var(--brand)';
           el.style.transform = 'translateY(-3px) scale(1.05)';
           el.style.boxShadow = 'var(--shadow-md)';
         }}
@@ -121,7 +121,7 @@ const TechItem = ({
             style={{
               fontWeight: 700,
               fontSize: '0.8rem',
-              color: 'var(--accent)',
+              color: 'var(--brand)',
             }}
           >
             {name.charAt(0)}

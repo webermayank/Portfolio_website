@@ -125,7 +125,7 @@ const Hero = () => {
               ]}
               className=""
               style={{
-                color: 'var(--accent)',
+                color: 'var(--brand)',
                 fontWeight: 600,
               } as React.CSSProperties}
             />
@@ -184,8 +184,8 @@ const Hero = () => {
                   transition: 'border-color 0.2s ease, color 0.2s ease, transform 0.15s ease',
                 }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--accent)';
-                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--accent)';
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--brand)';
+                  (e.currentTarget as HTMLAnchorElement).style.color = 'var(--brand)';
                   (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={e => {

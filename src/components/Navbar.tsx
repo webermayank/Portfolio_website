@@ -72,7 +72,7 @@ const Navbar = () => {
                   width: '32px',
                   height: '32px',
                   borderRadius: '8px',
-                  backgroundColor: 'var(--accent)',
+                  backgroundColor: 'var(--brand)',
                   color: '#fff',
                   fontWeight: 700,
                   fontSize: '0.8rem',
@@ -135,7 +135,7 @@ const Navbar = () => {
                   alignItems: 'center',
                   gap: '0.4rem',
                   padding: '0.45rem 1rem',
-                  backgroundColor: 'var(--accent)',
+                  backgroundColor: 'var(--brand)',
                   color: '#fff',
                   fontSize: '0.8rem',
                   fontWeight: 600,
@@ -147,11 +147,11 @@ const Navbar = () => {
                   cursor: 'pointer',
                 }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--accent-hover)';
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--brand-hover)';
                   (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-1px)';
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--accent)';
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--brand)';
                   (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)';
                 }}
               >

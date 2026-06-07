@@ -121,7 +121,7 @@ const Features = () => {
                   width: '36px',
                   height: '36px',
                   borderRadius: '8px',
-                  backgroundColor: 'var(--accent-subtle)',
+                  backgroundColor: 'var(--brand-subtle)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -132,7 +132,7 @@ const Features = () => {
                 <feature.icon
                   size={18}
                   stroke={1.8}
-                  style={{ color: 'var(--accent)' }}
+                  style={{ color: 'var(--brand)' }}
                 />
               </div>
 

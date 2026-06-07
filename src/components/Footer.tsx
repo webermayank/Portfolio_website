@@ -42,7 +42,7 @@ const Footer = () => {
                 width: '26px',
                 height: '26px',
                 borderRadius: '6px',
-                backgroundColor: 'var(--accent)',
+                backgroundColor: 'var(--brand)',
                 color: '#fff',
                 fontWeight: 700,
                 fontSize: '0.65rem',
@@ -68,7 +68,7 @@ const Footer = () => {
             }}
           >
             Built with <Heart size={11} style={{ color: '#f43f5e', flexShrink: 0 }} strokeWidth={2} /> and{' '}
-            <Code2 size={11} style={{ color: 'var(--accent)', flexShrink: 0 }} strokeWidth={2} />
+            <Code2 size={11} style={{ color: 'var(--brand)', flexShrink: 0 }} strokeWidth={2} />
             {' '}using React + TypeScript
           </span>
 
@@ -103,8 +103,8 @@ const Footer = () => {
             zIndex: 40,
           }}
           onMouseEnter={e => {
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)';
-            (e.currentTarget as HTMLButtonElement).style.color = 'var(--accent)';
+            (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--brand)';
+            (e.currentTarget as HTMLButtonElement).style.color = 'var(--brand)';
             (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-2px)';
           }}
           onMouseLeave={e => {

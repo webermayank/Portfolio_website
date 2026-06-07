@@ -188,14 +188,14 @@ const Contact = () => {
                       width: '32px',
                       height: '32px',
                       borderRadius: '7px',
-                      backgroundColor: 'var(--accent-subtle)',
+                      backgroundColor: 'var(--brand-subtle)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
                     }}
                   >
-                    <method.icon size={14} style={{ color: 'var(--accent)' }} strokeWidth={1.8} />
+                    <method.icon size={14} style={{ color: 'var(--brand)' }} strokeWidth={1.8} />
                   </div>
                   <div>
                     <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
@@ -271,8 +271,8 @@ const Contact = () => {
                     required
                     style={inputStyle}
                     onFocus={e => {
-                      (e.target as HTMLInputElement).style.borderColor = 'var(--accent)';
-                      (e.target as HTMLInputElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent)';
+                      (e.target as HTMLInputElement).style.borderColor = 'var(--brand)';
+                      (e.target as HTMLInputElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--brand) 15%, transparent)';
                     }}
                     onBlur={e => {
                       (e.target as HTMLInputElement).style.borderColor = 'var(--border)';
@@ -291,8 +291,8 @@ const Contact = () => {
                     required
                     style={inputStyle}
                     onFocus={e => {
-                      (e.target as HTMLInputElement).style.borderColor = 'var(--accent)';
-                      (e.target as HTMLInputElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent)';
+                      (e.target as HTMLInputElement).style.borderColor = 'var(--brand)';
+                      (e.target as HTMLInputElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--brand) 15%, transparent)';
                     }}
                     onBlur={e => {
                       (e.target as HTMLInputElement).style.borderColor = 'var(--border)';
@@ -315,8 +315,8 @@ const Contact = () => {
                   required
                   style={inputStyle}
                   onFocus={e => {
-                    (e.target as HTMLInputElement).style.borderColor = 'var(--accent)';
-                    (e.target as HTMLInputElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent)';
+                    (e.target as HTMLInputElement).style.borderColor = 'var(--brand)';
+                    (e.target as HTMLInputElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--brand) 15%, transparent)';
                   }}
                   onBlur={e => {
                     (e.target as HTMLInputElement).style.borderColor = 'var(--border)';
@@ -338,9 +338,9 @@ const Contact = () => {
                         padding: '0.35rem 0.75rem',
                         borderRadius: '999px',
                         border: '1px solid',
-                        borderColor: formData.reason === r ? 'var(--accent)' : 'var(--border)',
-                        backgroundColor: formData.reason === r ? 'var(--accent-subtle)' : 'transparent',
-                        color: formData.reason === r ? 'var(--accent-text)' : 'var(--text-secondary)',
+                        borderColor: formData.reason === r ? 'var(--brand)' : 'var(--border)',
+                        backgroundColor: formData.reason === r ? 'var(--brand-subtle)' : 'transparent',
+                        color: formData.reason === r ? 'var(--brand-text)' : 'var(--text-secondary)',
                         fontSize: '0.76rem',
                         fontWeight: 500,
                         cursor: 'pointer',
@@ -367,8 +367,8 @@ const Contact = () => {
                   required
                   style={{ ...inputStyle, resize: 'vertical', minHeight: '100px' }}
                   onFocus={e => {
-                    (e.target as HTMLTextAreaElement).style.borderColor = 'var(--accent)';
-                    (e.target as HTMLTextAreaElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent)';
+                    (e.target as HTMLTextAreaElement).style.borderColor = 'var(--brand)';
+                    (e.target as HTMLTextAreaElement).style.boxShadow = '0 0 0 3px color-mix(in srgb, var(--brand) 15%, transparent)';
                   }}
                   onBlur={e => {
                     (e.target as HTMLTextAreaElement).style.borderColor = 'var(--border)';

@@ -237,7 +237,7 @@ const About = () => {
                     width: '38px',
                     height: '38px',
                     borderRadius: '10px',
-                    backgroundColor: 'var(--accent-subtle)',
+                    backgroundColor: 'var(--brand-subtle)',
                     border: '1px solid var(--border)',
                     display: 'flex',
                     alignItems: 'center',
@@ -248,8 +248,8 @@ const About = () => {
                   }}
                 >
                   {item.type === 'education'
-                    ? <GraduationCap size={16} style={{ color: 'var(--accent)' }} strokeWidth={1.8} />
-                    : <Briefcase size={16} style={{ color: 'var(--accent)' }} strokeWidth={1.8} />
+                    ? <GraduationCap size={16} style={{ color: 'var(--brand)' }} strokeWidth={1.8} />
+                    : <Briefcase size={16} style={{ color: 'var(--brand)' }} strokeWidth={1.8} />
                   }
                 </div>
 
@@ -268,7 +268,7 @@ const About = () => {
                       fontWeight: 600,
                       letterSpacing: '0.06em',
                       textTransform: 'uppercase',
-                      color: 'var(--accent)',
+                      color: 'var(--brand)',
                       display: 'block',
                       marginBottom: '0.3rem',
                     }}
